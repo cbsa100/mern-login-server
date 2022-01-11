@@ -15,10 +15,10 @@ const auth = require('./routes/auth.routes');
 app.use('/api/auth', auth);
 
 app.get('/', (req, res) => {
-  res.send('hello coders');
+  res.send('hello');
 });
 
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
   console.log(`your app is running in ${PORT}`);
