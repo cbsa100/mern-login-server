@@ -34,7 +34,8 @@ router.post('/signin-user', (req, res, next) => {
           email: getUser.email,
           userId: getUser._id,
         },
-        'longer-secret-is-better'
+        process.env.JWT_SECRET,
+        { expiresIn: 3600 }
       );
       res.status(200).json({
         token: jwtToken,
@@ -79,7 +80,13 @@ router.route('/all-user').get(authorize, (req, res) => {
     if (error) {
       return next(error);
     }
-    res.status(200).json(response);
+    res.status(200).json(response.map((e) => e.name));
   });
+});
+
+// validate
+
+router.route('/verify').get(authorize, (req, res) => {
+  res.status(200).json('response');
 });
 module.exports = router;
